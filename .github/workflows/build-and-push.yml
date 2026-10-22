@@ -32,11 +32,11 @@ jobs:
         with:
           context: ./prometheus
           push: true
-          tags: sheriffdocker89/prometheus:latest
+          tags: sheriffdocker89/monitoring:prometheus
 
       - name: Build and Push Grafana
         uses: docker/build-push-action@v5
         with:
           context: ./grafana
           push: true
-          tags: sheriffdocker89/grafana:latest
+          tags: sheriffdocker89/monitoring:grafana
