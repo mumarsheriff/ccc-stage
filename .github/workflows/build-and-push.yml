@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
@@ -22,16 +22,21 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Verify Docker Login
+        run: |
+          echo "Docker User: ${{ secrets.DOCKER_USERNAME }}"
+          docker info
+
       - name: Build and Push Prometheus
         uses: docker/build-push-action@v5
         with:
           context: ./prometheus
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/prometheus:latest
+          tags: sheriffdocker89/prometheus:latest
 
       - name: Build and Push Grafana
         uses: docker/build-push-action@v5
         with:
           context: ./grafana
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/grafana:latest
+          tags: sheriffdocker89/grafana:latest
